@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyCompiler - Python Compiler Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=21">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+    <div
+        id="lightRays"
+        class="light-rays-container"
+        data-rays-origin="top-center"
+        data-rays-color="#ffffff"
+        data-rays-speed="1.25"
+        data-light-spread="0.92"
+        data-ray-length="1.45"
+        data-fade-distance="1.05"
+        data-saturation="0.9"
+        data-follow-mouse="true"
+        data-mouse-influence="0.08"
+        data-noise-amount="0.08"
+        data-distortion="0.035"
+        aria-hidden="true"
+    ></div>
+
+    <nav class="navbar" aria-label="Navigasi utama">
+        <a class="brand" href="#home" aria-label="PyCompiler Home">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="" class="brand-icon">
+            <span>Py<span>Compiler</span></span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Buka navigasi" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#fitur">Fitur</a>
+            <a href="#cara-kerja">Cara Kerja</a>
+            <a href="#demo">Demo</a>
+            <a href="#dokumentasi">Dokumentasi</a>
+            <a href="#tentang">Tentang</a>
+        </div>
+    </nav>
+
+    <header class="site-header" id="home">
+        <section class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow hero-eyebrow"><span></span>Python Compiler Project</p>
+                <h1><span>Compiler</span> Python dari Source Code hingga Eksekusi</h1>
+                <p class="hero-text">
+                    Proyek compiler Python sederhana yang dibangun untuk memahami tahapan
+                    utama compiler: Lexical Analysis, Parsing, Semantic Analysis, hingga Code Generation.
+                </p>
+                <div class="hero-actions">
+                    <a class="primary-action" href="#demo">Lihat Demo <i data-lucide="play"></i></a>
+                    <a class="secondary-action" href="https://github.com/" target="_blank" rel="noreferrer">Lihat di GitHub <i data-lucide="github"></i></a>
+                </div>
+                <div class="hero-metrics" aria-label="Ringkasan kemampuan compiler">
+                    <div><strong>8</strong><span>Tahapan</span></div>
+                    <div><strong>0</strong><span>eval()</span></div>
+                    <div><strong>Chart.js</strong><span>Grafik</span></div>
+                </div>
+            </div>
+
+            <form class="compiler-panel" id="quickCompileForm">
+                <div class="panel-topbar">
+                    <span class="file-dot red"></span>
+                    <span class="file-dot yellow"></span>
+                    <span class="file-dot green"></span>
+                    <span class="file-name">source.pyc</span>
+                </div>
+                <label for="sourceCodeHero">Source Code</label>
+                <textarea id="sourceCodeHero" spellcheck="false">y = x pangkat 2 + 2 x + 4</textarea>
+                <div class="range-grid">
+                    <label>
+                        x start
+                        <input id="xStartHero" type="number" value="0">
+                    </label>
+                    <label>
+                        x end
+                        <input id="xEndHero" type="number" value="10">
+                    </label>
+                </div>
+                <button class="compile-button" type="submit">Compile</button>
+                <div class="hero-console">
+                    <span>pipeline</span>
+                    <strong>Lexer -> Parser -> Semantic -> Execution</strong>
+                </div>
+            </form>
+        </section>
+    </header>
+
+    <main>
+        <section class="feature-band" id="fitur">
+            <div class="section-heading">
+                <p class="eyebrow">Fitur Utama</p>
+                <h2>Tahapan compiler dalam satu halaman</h2>
+            </div>
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <span class="feature-icon blue">{ }</span>
+                    <h3>Lexical Analyzer</h3>
+                    <p>Memecah source code menjadi token berdasarkan aturan leksikal.</p>
+                </article>
+                <article class="feature-card">
+                    <span class="feature-icon green">AST</span>
+                    <h3>Parsing</h3>
+                    <p>Membangun Abstract Syntax Tree dengan recursive descent parser.</p>
+                </article>
+                <article class="feature-card">
+                    <span class="feature-icon amber">OK</span>
+                    <h3>Semantic Analyzer</h3>
+                    <p>Memastikan output adalah y, variabel bebas x, dan operator valid.</p>
+                </article>
+                <article class="feature-card">
+                    <span class="feature-icon violet">&lt;/&gt;</span>
+                    <h3>Code Generation</h3>
+                    <p>Menampilkan bentuk fungsi hasil kompilasi tanpa menggunakan eval.</p>
+                </article>
+                <article class="feature-card">
+                    <span class="feature-icon cyan">y</span>
+                    <h3>Execution</h3>
+                    <p>Menghitung nilai y dari range x dan menggambarkannya dengan Chart.js.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="workflow-section" id="cara-kerja">
+            <div class="section-heading">
+                <p class="eyebrow">Cara Kerja</p>
+                <h2>Pipeline kompilasi sederhana</h2>
+            </div>
+            <div class="workflow">
+                <div>Source</div>
+                <span></span>
+                <div>Lexer</div>
+                <span></span>
+                <div>Parser</div>
+                <span></span>
+                <div>Semantic</div>
+                <span></span>
+                <div>Execution</div>
+            </div>
+        </section>
+
+        <section class="demo-section" id="demo">
+            <div class="section-heading">
+                <p class="eyebrow">Demo</p>
+                <h2>Compile persamaan matematika</h2>
+            </div>
+
+            <div class="demo-layout">
+                <form class="input-card" id="compileForm">
+                    <label for="sourceCode">Source Code</label>
+                    <textarea id="sourceCode" spellcheck="false">y = x pangkat 2 + 2 x + 4</textarea>
+                    <div class="sample-row" aria-label="Contoh source code">
+                        <button type="button" data-sample="y = x pangkat 2 + 2 x + 4">Kuadrat</button>
+                        <button type="button" data-sample="y = 3 x pangkat 2 - 2 x + 1">Parabola</button>
+                        <button type="button" data-sample="y = (x + 1)(x + 2)">Implisit</button>
+                        <button type="button" data-sample="y = x^3 - 4 x">Pangkat ^</button>
+                    </div>
+                    <div class="range-grid">
+                        <label>
+                            x start
+                            <input id="xStart" type="number" value="0">
+                        </label>
+                        <label>
+                            x end
+                            <input id="xEnd" type="number" value="10">
+                        </label>
+                    </div>
+                    <button class="compile-button" type="submit">Compile</button>
+                    <p class="hint">Operator: +, -, *, /, pangkat. Alias ^ juga didukung.</p>
+                </form>
+
+                <div class="status-card" aria-live="polite">
+                    <span class="status-label">Status</span>
+                    <strong id="compileStatus">Menunggu compile</strong>
+                    <p id="statusDetail">Klik Compile untuk menjalankan tahapan kompilasi.</p>
+                    <div class="status-metrics">
+                        <div><span>Token</span><strong id="tokenCount">0</strong></div>
+                        <div><span>Data</span><strong id="executionCount">0</strong></div>
+                        <div><span>Range</span><strong id="rangeInfo">0-10</strong></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="error-box" id="errorBox" hidden></div>
+
+            <div class="output-grid">
+                <article class="output-card">
+                    <div class="card-head"><h3>Source Code</h3><button type="button" class="copy-button" data-copy-target="sourceOutput">Copy</button></div>
+                    <pre id="sourceOutput"></pre>
+                </article>
+                <article class="output-card">
+                    <div class="card-head"><h3>BNF</h3><button type="button" class="copy-button" data-copy-target="bnfOutput">Copy</button></div>
+                    <pre id="bnfOutput"></pre>
+                </article>
+                <article class="output-card">
+                    <div class="card-head"><h3>CFG</h3><button type="button" class="copy-button" data-copy-target="cfgOutput">Copy</button></div>
+                    <pre id="cfgOutput"></pre>
+                </article>
+                <article class="output-card">
+                    <div class="card-head"><h3>Lexical Analyzer</h3><span class="card-pill">Tokens</span></div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tokenTable"></tbody>
+                        </table>
+                    </div>
+                </article>
+                <article class="output-card">
+                    <div class="card-head"><h3>Syntax Analyzer / AST</h3><button type="button" class="copy-button" data-copy-target="astOutput">Copy</button></div>
+                    <pre id="astOutput"></pre>
+                </article>
+                <article class="output-card">
+                    <div class="card-head"><h3>Semantic Analyzer</h3><span class="card-pill success">Validasi</span></div>
+                    <pre id="semanticOutput"></pre>
+                </article>
+                <article class="output-card wide">
+                    <div class="card-head"><h3>Code Generation &amp; Execution</h3><button type="button" class="copy-button" data-copy-target="generatedCodeOutput">Copy</button></div>
+                    <pre id="generatedCodeOutput"></pre>
+                    <div class="table-wrap execution-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>x</th>
+                                    <th>y</th>
+                                </tr>
+                            </thead>
+                            <tbody id="executionTable"></tbody>
+                        </table>
+                    </div>
+                </article>
+                <article class="output-card wide chart-card">
+                    <div class="card-head"><h3>Grafik y vs x</h3><span class="card-pill">Chart.js</span></div>
+                    <canvas id="resultChart" height="140"></canvas>
+                </article>
+            </div>
+        </section>
+
+        <section class="docs-section" id="dokumentasi">
+            <div class="section-heading">
+                <p class="eyebrow">Dokumentasi</p>
+                <h2>API compile</h2>
+            </div>
+            <div class="docs-grid">
+                <article>
+                    <h3>POST /compile</h3>
+                    <pre>{
+  "source_code": "y = x pangkat 2 + 2 x + 4",
+  "x_start": 0,
+  "x_end": 10
+}</pre>
+                </article>
+                <article>
+                    <h3>Ketentuan bahasa</h3>
+                    <p>Output wajib y, variabel bebas x, dan perkalian implisit seperti 2 x atau (x + 1)(x + 2) diproses otomatis.</p>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer" id="tentang">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <span class="footer-icon">&lt;/&gt;</span>
+                <div>
+                    <h2>Tentang Proyek</h2>
+                    <p>
+                        PyCompiler adalah proyek educational yang dibuat dengan Python untuk memahami
+                        bagaimana sebuah compiler bekerja dari source code hingga execution.
+                    </p>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Tujuan Proyek</h3>
+                <ul>
+                    <li><span></span>Media pembelajaran compiler</li>
+                    <li><span></span>Implementasi konsep teori</li>
+                    <li><span></span>Proyek open source</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Teknologi</h3>
+                <ul>
+                    <li><span></span>Python 3</li>
+                    <li><span></span>Flask</li>
+                    <li><span></span>Chart.js</li>
+                </ul>
+            </div>
+            <div class="footer-column footer-command">
+                <h3>Cara Menjalankan</h3>
+                <pre>git clone https://github.com/username/pycompiler.git
+cd pycompiler-web
+python app.py</pre>
+            </div>
+        </div>
+        <p class="footer-copy">&copy; 2026 PyCompiler. Dibuat dengan <span>&hearts;</span> untuk belajar dan berbagi.</p>
+    </footer>
+
+    <script type="module" src="{{ url_for('static', filename='light-rays.js') }}?v=21"></script>
+    <script src="{{ url_for('static', filename='script.js') }}?v=21"></script>
+</body>
+</html>
